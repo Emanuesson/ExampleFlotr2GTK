@@ -1,7 +1,7 @@
 General Information
 ===================
 
-This is a minimum demonstration to show the possibility of including lotr2 into gtk+ via webkit2.
+This is a minimum demonstration to show the possibility of including Flotr2 into gtk+3 via webkit2.
 
 Compilation
 -----------
