@@ -18,4 +18,4 @@ Example
 
 Just a small screenshot to show how the working test binary should look like:
 
-<img src="https://raw.github.com/Emanuesson/ExampleFlotr2GTK+/master/pics/testbin_sinus.png" width="400px" height="300px" />
+<img src="https://raw.github.com/Emanuesson/ExampleFlotr2GTK/master/pics/testbin_sinus.png" width="400px" height="300px" />
