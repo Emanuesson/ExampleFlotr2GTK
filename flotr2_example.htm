@@ -1,0 +1,59 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <style type="text/css">
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container {
+        width : 600px;
+        height: 384px;
+        margin: 8px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="position: relative;" id="container"><canvas height="384" width="600" style="position: absolute; left: 0px; top: 0px; width: 600px; height: 384px;" class="flotr-canvas"></canvas><canvas height="384" width="600" style="position: absolute; left: 0px; top: 0px; width: 600px; height: 384px;" class="flotr-overlay"></canvas><div style="position: absolute; top: -10000px;"><div style="font-size:smaller;" class="flotr-grid-label flotr-dummy-div">10.0</div></div><div style="position: absolute; top: -10000px;"><div style="font-size:smaller;" class="flotr-grid-label flotr-dummy-div">-2.0</div></div><div class="flotr-labels" style="font-size: smaller; color: rgb(84, 84, 84);"><div style="position:absolute; text-align:center;  top:367px;  left:-29.1px;  width:114.2px;    " class="flotr-grid-label first flotr-grid-label-x">0.0</div><div style="position:absolute; text-align:center;  top:367px;  left:86.0209677419356px;  width:114.2px;    " class="flotr-grid-label flotr-grid-label-x">2.5</div><div style="position:absolute; text-align:center;  top:367px;  left:201.1419354838712px;  width:114.2px;    " class="flotr-grid-label flotr-grid-label-x">5.0</div><div style="position:absolute; text-align:center;  top:367px;  left:316.2629032258068px;  width:114.2px;    " class="flotr-grid-label flotr-grid-label-x">7.5</div><div style="position:absolute; text-align:center;  top:367px;  left:431.3838709677424px;  width:114.2px;    " class="flotr-grid-label last flotr-grid-label-x">10.0</div><div style="position:absolute; text-align:right;  top:356px;  left:0px;  width:25px;    " class="flotr-grid-label first flotr-grid-label-y">-2.0</div><div style="position:absolute; text-align:right;  top:265.25px;  left:0px;  width:25px;    " class="flotr-grid-label flotr-grid-label-y">-1.0</div><div style="position:absolute; text-align:right;  top:174.5px;  left:0px;  width:25px;    " class="flotr-grid-label flotr-grid-label-y">0.0</div><div style="position:absolute; text-align:right;  top:83.75px;  left:0px;  width:25px;    " class="flotr-grid-label flotr-grid-label-y">1.0</div><div style="position:absolute; text-align:right;  top:-7px;  left:0px;  width:25px;    " class="flotr-grid-label last flotr-grid-label-y">2.0</div></div><div class="flotr-titles"><div class="flotr-axis-title" style="font-weight:bold;"></div></div></div>
+    <!--[if IE]>
+    <script type="text/javascript" src="/static/lib/FlashCanvas/bin/flashcanvas.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="example_files/flotr2.js"></script>
+    <script type="text/javascript">
+      (function () {
+
+        var
+          container = document.getElementById('container'),
+          start = (new Date).getTime(),
+          data, graph, offset, i;
+
+        // Draw a sine curve at time t
+        function animate (t) {
+
+          data = [];
+          offset = 2 * Math.PI * (t - start) / 10000;
+
+          // Sample the sine function
+          for (i = 0; i < 4 * Math.PI; i += 0.2) {
+            data.push([i, Math.sin(i - offset)]);
+          }
+
+          // Draw Graph
+          graph = Flotr.draw(container, [ data ], {
+            yaxis : {
+              max : 2,
+              min : -2
+            }
+          });
+
+          // Animate
+          setTimeout(function () {
+            animate((new Date).getTime());
+          }, 50);
+        }
+
+        animate(start);
+      })();
+    </script>
+  
+
+</body></html>
