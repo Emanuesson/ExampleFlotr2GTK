@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/net/test">
     <file>flotr2_example.htm</file>
+    <file>example_files/flotr2.js</file>
   </gresource>
 </gresources>

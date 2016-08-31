@@ -29,12 +29,20 @@
 #include <gio/gio.h>
 #include <webkit2/webkit2.h>
 
-static void destroy( GtkWidget *widget,
+static void destroy (GtkWidget *widget,
                      gpointer   data )
 {
     gtk_main_quit ();
 }
 
+static void ready_callback (GObject *source_obj,
+                            GAsyncResult *res,
+                            gpointer user_data)
+{
+  /*
+   * You can start to interact with the Plotting-script here
+   */
+}
 
 int
 main (int argc, char **argv)
@@ -61,35 +69,25 @@ main (int argc, char **argv)
 
   gtk_widget_show_all (GTK_WIDGET (main_window));
 
+  /* Loading flotr2 to the web_view */
+  webkit_web_view_run_javascript_from_gresource (
+    WEBKIT_WEB_VIEW (web_view),
+    "/net/test/example_files/flotr2.js",
+    NULL,
+    ready_callback,
+    NULL);
+
+  /* Loading the html-file with style-properties and the actual script */
   GBytes *html_file =
     g_resources_lookup_data (
       "/net/test/flotr2_example.htm",
       G_RESOURCE_LOOKUP_FLAGS_NONE,
       NULL);
 
-  /* nice idea, but fails to translate the css location */
-/*  webkit_web_view_load_bytes (
- *   WEBKIT_WEB_VIEW (web_view),
- *   html_file, NULL, NULL, NULL);
- */
-
-  /* another nice idea, but requires a internet-connection and is probably no good general solution */
-/*  webkit_web_view_load_uri (
- *    WEBKIT_WEB_VIEW (web_view),
- *    "http://www.humblesoftware.com/flotr2/example");
- */
-
-  /* the best idea so far, but requires an installation */
-/*  webkit_web_view_load_uri (
- *    WEBKIT_WEB_VIEW (web_view),
- *    "file://"DATADIR"/flotr2_example.htm");
- */
-
-  /* this is porbably the worst idea so far */
-  gchar* input_dir = g_get_current_dir ();
-  gchar full_uri[512];
-  snprintf(full_uri, sizeof full_uri, "file://%s/flotr2_example.htm", input_dir);
-  webkit_web_view_load_uri (WEBKIT_WEB_VIEW (web_view), full_uri);
+  /* executing the html-file */
+  webkit_web_view_load_bytes (
+   WEBKIT_WEB_VIEW (web_view),
+   html_file, NULL, NULL, NULL);
 
   gtk_main ();
 
